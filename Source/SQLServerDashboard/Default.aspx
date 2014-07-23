@@ -42,7 +42,7 @@
             <h1><%= ConnectionString %></h1>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="panel panel-success">
                         <div class="panel-heading">Batch Requests/sec</div>
                         <div class="panel-body panel-body-height">
@@ -52,7 +52,7 @@
                         </div>   
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="panel panel-success">
                         <div class="panel-heading">Full Scans/sec</div>
                         <div class="panel-body panel-body-height" >
@@ -62,7 +62,10 @@
                         </div>   
                     </div>
                 </div>
-                <div class="col-md-3">
+              
+            </div>
+            <div class="row">
+				<div class="col-md-6">
                     <div class="panel panel-success">
                         <div class="panel-heading">SQL Compilations/sec</div>
                         <div class="panel-body panel-body-height" >
@@ -72,7 +75,7 @@
                         </div>   
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="panel panel-success">
                         <div class="panel-heading">Total Latch Wait Time (ms)</div>
                         <div class="panel-body panel-body-height" >
@@ -82,8 +85,7 @@
                         </div>   
                     </div>
                 </div>
-            </div>
-
+			</div>
 
             <div class="row">
                 <div class="panel panel-success">
