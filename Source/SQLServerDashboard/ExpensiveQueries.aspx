@@ -94,7 +94,7 @@ core AS (
                 sys.dm_exec_cached_plans AS ecp
                 CROSS APPLY sys.dm_exec_query_plan(ecp.plan_handle) AS eqp
                 CROSS APPLY sys.dm_exec_sql_text(ecp.plan_handle) AS q
-                CROSS APPLY query_plan.nodes ('/ShowPlanXML/BatchSequence/Batch/Statements/StmtSimple') AS qn ( n )
+                CROSS APPLY query_plan.nodes ('/ShowPlanXML/BatchSequence/Batch/Statements/StmtSimple[@StatementSubTreeCost > 1]') AS qn ( n )
 				CROSS APPLY query_plan.nodes ('/ShowPlanXML/BatchSequence/Batch/Statements/StmtSimple/QueryPlan//RelOp[@PhysicalOp=&quot;Table Scan&quot;]/TableScan/Predicate/ScalarOperator') AS qt ( t )
 				CROSS APPLY query_plan.nodes ('/ShowPlanXML/BatchSequence/Batch/Statements/StmtSimple/QueryPlan//RelOp[@EstimateCPU = max(/ShowPlanXML/BatchSequence/Batch/Statements/StmtSimple/QueryPlan//RelOp/@EstimateCPU)]') AS qr ( r )
 		WHERE 
@@ -140,7 +140,7 @@ SELECT
 
 
                                        
-                    "></asp:SqlDataSource>
+                    " OnSelecting="sqlDataSource_Selecting"></asp:SqlDataSource>
                 <asp:GridView CssClass="table table-striped" ID="GridView1" runat="server" DataSourceID="sqlDataSource" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField>
@@ -178,5 +178,10 @@ SELECT
         {
             sqlDataSource.ConnectionString = ConfigurationManager.ConnectionStrings[Request["c"]].ConnectionString;
         }
-    </script>
+
+        protected void sqlDataSource_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+            e.Command.CommandTimeout=90;
+        }
+</script>
 </html>
